@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  <title>Hello World (React)</title>
+  <script src="lib/react/react.development.js"></script>
+  <script src="lib/react/react-dom.development.js"></script>
+  <script src="lib/babel/babel.standalone.min.js"></script>
+  <script src="lib/sjdon/sjdon.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+
+const app = (
+  <div style={{background: "salmon"}}>
+    <h1 className="title">Hello World</h1>
+    <h2 style={{textAlign:"right"}}>from React</h2>
+  </div>
+)
+
+// const app = parseSJDON(
+//   ["div", {style: {background: "salmon"}},
+//     ["h1", "Hello World", {className: "title"}],
+//     ["h2", {style: {textAlign:"right"}}, "from React"] ]
+// )
+
+// { [Component] = useSJDON(Component) }
+
+const root = ReactDOM.createRoot(document.getElementById('root'))
+root.render(app)
+
+  </script>
+</body>
+</html>

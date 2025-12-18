@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  <title>Controlled input elements</title>
+  <script src="lib/react/react.development.js"></script>
+  <script src="lib/react/react-dom.development.js"></script>
+  <script src="lib/sjdon/sjdon.js"></script>
+</head>
+
+<body>
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+  <div id="root"></div>
+  
+  <script type="module">
+
+//
+//  Controlled input elements
+//  - re-render every time input is changed
+//  - focus and cursor position are restored
+//
+
+const { useState } = React
+
+let App = ({init}) => {
+
+  let [text, setText] = useState(init)
+  let [otherText, setOtherText] = useState("")
+
+  const updateValue = e => {
+    setText(() => e.target.value);
+  }
+
+  // only digits and one decimal point allowed:
+  //
+  // const updateValue = e => {
+  //   const inp = e.target.value
+  //   const reg = /^\d+\.?\d*$/
+  //   if (reg.test(inp)) setText(() => inp)
+  //   else setText(() => text)
+  // }
+
+  const updateOtherValue = e => {
+    setOtherText(() => e.target.value)
+  }
+
+  return (
+    ["div", {style: {background: "lightblue"}},
+      ["h1", "Controlled Input Elements"],
+      ["input", {onInput: updateValue, value: text}],
+      ["p", "Your input: ", text ],
+      ["textarea", {onInput: updateOtherValue}, otherText],
+      ["p", "Your input: ", otherText ] ] )
+
+}
+
+// attach SJDON decorators
+{ [App] = useSJDON(App) }
+
+
+const root = ReactDOM.createRoot(document.getElementById('root'))
+
+const element = [App, {init: "Name"}]
+
+root.render(
+  parseSJDON(element)
+)
+
+    
+  </script>
+</body>
+</html>

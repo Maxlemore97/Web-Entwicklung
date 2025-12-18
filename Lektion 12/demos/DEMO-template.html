@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  <title>React Component Notations</title>
+  <script src="lib/react/react.development.js"></script>
+  <script src="lib/react/react-dom.development.js"></script>
+  <script src="lib/babel/babel.standalone.min.js"></script>
+  <script src="lib/sjdon/sjdon.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+
+// component written in SJDON
+const Header = sjdon(({text}) => (
+  ["h1", "Hello WBE ", {className: "title"}, text]
+))
+
+// component written in JSX
+const App = (() => (
+  <div style={{background: "mediumaquamarine"}}>
+    <Header text="from React" />
+  </div>
+))
+
+// instead of the sjdon call in Header the decorator can
+// also attached later, like so:
+// 
+// { [Header] = useSJDON(Header) }
+// (note: Header must not be constant in order to use this option)
+
+const root = ReactDOM.createRoot(document.getElementById('root'))
+root.render(<App />)
+
+  </script>
+</body>
+</html>

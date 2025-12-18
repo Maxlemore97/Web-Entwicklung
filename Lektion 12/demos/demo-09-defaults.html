@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  <title>Defaults for props</title>
+  <script src="lib/react/react.development.js"></script>
+  <script src="lib/react/react-dom.development.js"></script>
+  <script src="lib/sjdon/sjdon.js"></script>
+</head>
+
+<body>
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+  <div id="root"></div>
+  
+  <script>
+
+//
+//  Defaults for props
+//
+
+let App = () => (
+  ["main", 
+    [MyButton, {disabled: true, text: 'Delete'}],
+    [MyButton] ]
+)
+
+let MyButton = ({disabled=false, text='Button'}) => (
+  ["button", disabled ? {disabled} : {}, text]
+)
+
+/*
+ *  Alternative ohne Destrukturieren mit Defaultangaben:
+ *
+const MyButton = (props) => {
+  const defaultProps = {
+    disabled: false, 
+    text: 'Button',
+  }
+  const myprops = {...defaultProps, ...props}
+  const { disabled, text } = myprops
+  
+  return (
+    ["button", {disabled}, text]
+  )
+}
+ *
+ */
+
+
+// attach SJDON decorators
+{ [App, MyButton] = useSJDON(App, MyButton) }
+
+
+const root = ReactDOM.createRoot(document.getElementById('root'))
+
+const element = [App]
+
+root.render(
+  parseSJDON(element)
+)
+    
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  <title>Rendering an object</title>
+  <script src="lib/react/react.development.js"></script>
+  <script src="lib/react/react-dom.development.js"></script>
+  <script src="lib/sjdon/sjdon.js"></script>
+</head>
+
+<body>
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+  <div id="root"></div>
+  
+  <script>
+
+//
+//  Object component in SJDON
+//
+
+const App = sjdon(({obj}) =>
+  ["table", {style},
+    ...Object.keys(obj).map((key) => 
+    ["tr", ["td", key], ["td", obj[key]]])]
+)
+
+const style = {
+  width: "8em",
+  background: "lightblue",
+}
+
+// attach SJDON decorators
+// { [App] = useSJDON(App) }
+
+
+const root = ReactDOM.createRoot(document.getElementById('root'))
+
+const element = 
+  [App, {obj: {one: 1111, two: 2222, three: 3333}}]
+
+root.render(
+  parseSJDON(element)
+)
+    
+  </script>
+</body>
+</html>

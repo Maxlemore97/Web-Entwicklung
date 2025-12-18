@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  <title>Function components with children</title>
+  <script src="lib/react/react.development.js"></script>
+  <script src="lib/react/react-dom.development.js"></script>
+  <script src="lib/sjdon/sjdon.js"></script>
+</head>
+
+<body>
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+  <div id="root"></div>
+  
+  <script>
+
+//
+//  Function components with children
+//
+
+let MyButton = ({children, disabled=true}) => 
+  ["button", {style: {background: "khaki"}, ...(disabled ? {disabled} : {})}, ...children]
+
+let Header = ({name, children}) =>
+  ["h2", "Hello ", name, ...children]
+
+let App = (props) =>
+  ["div",
+    [Header, {name: props.name}, " and", ["br"], "web developers"],
+    [MyButton, "Start", {disabled:false}],
+    [MyButton, "Stop"] ]
+
+// attach SJDON decorators
+{ [App, Header, MyButton] = useSJDON(App, Header, MyButton) }
+
+
+const root = ReactDOM.createRoot(document.getElementById('root'))
+
+const element = [App, {name: "WBE"}]
+
+root.render(
+  parseSJDON(element)
+)
+    
+  </script>
+</body>
+</html>

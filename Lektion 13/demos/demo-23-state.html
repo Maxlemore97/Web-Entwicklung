@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  <title>Component with state</title>
+  <script src="lib/react/react.development.js"></script>
+  <script src="lib/react/react-dom.development.js"></script>
+  <script src="lib/sjdon/sjdon.js"></script>
+</head>
+
+<body>
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+  <div id="root"></div>
+  
+  <script type="module">
+
+//
+//  Component with state
+//
+const { useState } = React
+
+let Counter = (props) => {
+  let [count, setCount] = useState(props.count)
+  setTimeout(()=>setCount(count+1), 1000)
+
+  return (
+    ["p", 
+      {style: {fontSize: "2em"}, /* onClick: ()=>setCount(count+1) */}, 
+      "Count ", count ]
+  )
+}
+
+let App = (props) =>
+  ["div",
+    [Counter, {count: 1, key: 1}],
+    [Counter, {count: 4, key: 2}],
+    [Counter, {count: 7, key: 3}] ]
+
+// attach SJDON decorators
+{ [App, Counter] = useSJDON(App, Counter) }
+
+
+const root = ReactDOM.createRoot(document.getElementById('root'))
+
+const element = [App]
+
+root.render(
+  parseSJDON(element)
+)
+
+    
+  </script>
+</body>
+</html>

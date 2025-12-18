@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  <title>Passing sub trees</title>
+  <script src="lib/react/react.development.js"></script>
+  <script src="lib/react/react-dom.development.js"></script>
+  <script src="lib/sjdon/sjdon.js"></script>
+</head>
+
+<body>
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+  <div id="root"></div>
+  
+  <script>
+
+//
+//  Nested components in SJDON
+//
+
+let Main = ({header, name}) =>
+  ["div",
+    [...header, name],
+    ["p", "Welcome to SJDON"] ]
+
+let App = ({header}) =>
+  [Main, {header, name: "web developers"}]
+
+// attach SJDON decorators
+{ [App, Main] = useSJDON(App, Main) }
+
+
+const root = ReactDOM.createRoot(document.getElementById('root'))
+
+const element = [App, {header: ["h2", "Hello "]}]
+
+root.render(
+  parseSJDON(element)
+)
+    
+  </script>
+</body>
+</html>
