@@ -5,7 +5,6 @@ function assert(condition, message) {
 }
 
 function power(b, n) {
-  // --- BigInt-Fall ---
   if (typeof b === "bigint" && typeof n === "bigint") {
     assert(n >= 0n, "Exponent must be non-negative");
 
@@ -19,7 +18,6 @@ function power(b, n) {
     }
   }
 
-  // --- Number-Fall ---
   assert(typeof b === "number", "Base must be a number");
   assert(typeof n === "number", "Exponent must be a number");
   assert(Number.isInteger(n), "Exponent must be an integer");
@@ -41,6 +39,6 @@ console.log(`the value for 3n is %d`, power(3n, 3n));        // 27n
 // power(3, 3.5);      // AssertionError
 // power(3, -3);       // AssertionError
 
-console.log(`the value for 123456789012345678901234567890n and 2n is %d`, power(123456789012345678901234567890n, 2n));        // 27n
-// 15241578753238836750495351562536198787501905199875019052100n
+console.log(`the value for 123456789012345678901234567890n and 2n is %d`, power(123456789012345678901234567890n, 2n));        // 15241578753238836750495351562536198787501905199875019052100n
+
 
