@@ -41,4 +41,4 @@ console.log(`the value for 3n is %d`, power(3n, 3n));        // 27n
 
 console.log(`the value for 123456789012345678901234567890n and 2n is %d`, power(123456789012345678901234567890n, 2n));        // 15241578753238836750495351562536198787501905199875019052100n
 
-
+module.exports = { power }
